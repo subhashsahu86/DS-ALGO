@@ -76,12 +76,14 @@ public class Test05_Interview_Questions {
 
         //if asked 3rd or 4th largest then skip(2) and skip(3) we can use
 
-        System.out.println("==============================================");
+
 
           /*      =====================================================================================
         Problem 4 : Find the all the employees sorted by salary wise in ascending order using Stream api.
         =================================================================================== */
         List<Employee> employees = EmployeeDB.fetchEmployees();
+
+        System.out.println("==========Ascending Sorted order=============================");
 
         employees.stream()
               //  .sorted(Comparator.comparing(emp -> emp.getSalary())) //using Lambda
@@ -95,14 +97,16 @@ public class Test05_Interview_Questions {
         Problem 5 : Find the all the employees sorted by salary wise in
         descending(reversed) order using Stream api.
         =================================================================================== */
-
+        System.out.println("==========reverse/descending Sorted order=============================");
+           employees.stream()
+                   .filter(Objects::nonNull)
+                   .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                   .forEach(System.out::println);
 
            /*      =====================================================================================
         Problem 6 : Find the second highest salary of employees  using Stream api.
         =================================================================================== */
-
-
-
+        System.out.println("==========================================");
         // second Highest Salary amount only not full object
        Double secondHighestSalary = employees.stream()
                .filter(Objects::nonNull)
@@ -118,6 +122,14 @@ public class Test05_Interview_Questions {
         System.out.println("==========================================");
 
         //If interviewer asked fetch the full object
+     Employee secondHighestSalaryEmployee =   employees.stream()
+                .filter(Objects::nonNull)
+                .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .skip(1)
+                .findFirst()
+             .orElse(null);
+
+        System.out.println(secondHighestSalaryEmployee);
 
 
 
