@@ -1,4 +1,4 @@
-package org.subh.module1;
+package org.subh.module_1_Understanding_Threads;
 
 public class FirstThreadDemo {
 
