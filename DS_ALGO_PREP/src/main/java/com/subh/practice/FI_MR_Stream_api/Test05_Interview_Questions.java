@@ -1,8 +1,6 @@
 package com.subh.practice.FI_MR_Stream_api;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Test05_Interview_Questions {
@@ -130,6 +128,34 @@ public class Test05_Interview_Questions {
              .orElse(null);
 
         System.out.println(secondHighestSalaryEmployee);
+
+        /*      =====================================================================================
+        Problem 7 : Find the first non-repeated character in a string using Stream API
+        Input:  "aabbcde"
+        Output: c
+        =================================================================================== */
+        System.out.println("================== Problem : 7 ======================");
+        String str = "aabbcde";
+
+      Character result =  str.chars()  //convert the str into IntStream and values are there in ASCII format like 97 97 98 ...
+                .mapToObj(c-> (char)c) // converting int to char a, a,b,b...
+                .collect(Collectors.groupingBy( //grouping by all the character
+                        c-> c,   // we are group each character itself like from the character 'a' we are creating the group a like other group b , c,d...
+                        LinkedHashMap::new,  // by defult groupingBy() method uses HaspMap if we use same then insertion order will not follow so we are classifiying use LinkedHashMap so insertion order will mentain
+                        Collectors.counting() // then we are not storing the character itself we are counting the each character and storing the count of each character in the respective groups.
+                        )) //here we are getting LinkedHashMap
+                .entrySet() //A Map itself cannot be streamed directly in a useful way.entrySet() converts the map into a set of key–value pairs.
+                .stream()//converting the entries into stream like ('a', 2) → ('b', 2) → ('c', 1) → ('d', 1) → ('e', 1)
+              .filter(e-> e.getValue()==1)//after filter ('c', 1), ('d', 1), ('e', 1)
+              .map(Map.Entry::getKey)//'c', 'd', 'e'
+              .findFirst() //c
+                .orElse(null);
+
+        System.out.println(result);
+
+
+
+
 
 
 
