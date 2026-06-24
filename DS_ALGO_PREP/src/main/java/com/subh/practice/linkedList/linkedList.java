@@ -54,6 +54,17 @@ public class linkedList {
         
     }
 
+    void deleteNode(Node node){
+        Node prev = null;
+
+        while(node != null){
+            node.data = node.next.data;
+            prev = node;
+            node = node.next;
+        }
+        prev = null;
+    }
+
     public static class Node{
         int data;
         Node next;

@@ -1,4 +1,4 @@
-package com.subh.leetcode;
+package com.subh.leetcode.easy;
 
 public class Prob09_isPalandromeNumber {
 	
